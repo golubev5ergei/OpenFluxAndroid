@@ -20,6 +20,11 @@ jobs:
           - name: Make gradlew executable
             run: chmod +x gradlew
 
+          - name: Patch upstream bug
+            run: |
+              sed -i 's/if (supervisor.isRunning) supervisor.forceRestart()/\/\/ if (supervisor.isRunning) supervisor.forceRestart()/g'
+              app/src/main/java/io/github/p1neapplexpress/openflux/service/SocksVpnService.kt
+
           - name: Build Debug APK
             run: ./gradlew assembleDebug
 
